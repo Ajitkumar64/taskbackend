@@ -4,14 +4,14 @@ const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 
-const PORT = process.env.PORT || 3000;
-
-// Use middlewares
+// use default middleware
 server.use(middlewares);
+
+// parse JSON body
 server.use(jsonServer.bodyParser);
+
+// use router
 server.use(router);
 
-// Listen properly for Render
-server.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// export server for Vercel
+module.exports = server;
